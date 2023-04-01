@@ -112,6 +112,13 @@ export const characterParts: CharacterParts = {
     { id: 8, name: 'Eyes 1', image: '/assets/eyes/vipers.png' },
     { id: 9, name: 'Eyes 1', image: '/assets/eyes/vr.png' },
     { id: 10, name: 'Eyes 1', image: '/assets/eyes/yellow-glasses.png' },
+    { id: 11, name: 'Eyes 1', image: '/assets/eyes/vr-blue.png' },
+    { id: 12, name: 'Eyes 1', image: '/assets/eyes/vr-gray.png' },
+    { id: 13, name: 'Eyes 1', image: '/assets/eyes/vr-lime.png' },
+    { id: 14, name: 'Eyes 1', image: '/assets/eyes/vr-orange.png' },
+    { id: 15, name: 'Eyes 1', image: '/assets/eyes/vr-pink.png' },
+    { id: 16, name: 'Eyes 1', image: '/assets/eyes/vr-solana.png' },
+    { id: 17, name: 'Eyes 1', image: '/assets/eyes/vr-viper.png' },
     // add more eyes
   ],
   mouth: [
