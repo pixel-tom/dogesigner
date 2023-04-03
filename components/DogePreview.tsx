@@ -2,13 +2,15 @@
 import React, { useRef } from "react";
 import Image from "next/image";
 import html2canvas from "html2canvas";
-import { SelectedCharacterParts } from "../types";
+import { CharacterParts, SelectedCharacterParts } from "../types";
+import { characterParts } from "@/data";
 
 interface Props {
   selectedParts: SelectedCharacterParts;
+  onRandomize: (newParts: SelectedCharacterParts) => void;
 }
 
-const CharacterPreview: React.FC<Props> = ({ selectedParts }) => {
+const CharacterPreview: React.FC<Props> = ({ selectedParts, onRandomize }) => {
   const previewRef = useRef<HTMLDivElement>(null);
 
   const handleDownload = () => {
@@ -24,7 +26,16 @@ const CharacterPreview: React.FC<Props> = ({ selectedParts }) => {
       );
     }
   };
-  
+
+  const handleRandomize = () => {
+    const newSelectedParts: SelectedCharacterParts = {};
+    for (const category in characterParts) {
+      const parts = characterParts[category as keyof CharacterParts];
+      const randomIndex = Math.floor(Math.random() * parts.length);
+      newSelectedParts[category as keyof CharacterParts] = parts[randomIndex];
+    }
+    onRandomize(newSelectedParts);
+  };
 
   return (
     <div>
@@ -47,8 +58,14 @@ const CharacterPreview: React.FC<Props> = ({ selectedParts }) => {
       </div>
       <div className="flex justify-center">
         <button
+          onClick={handleRandomize}
+          className="bg-slate-300 border border-gray-100 hover:bg-slate-400 text-gray-600 text-xl py-2 px-4 rounded mt-4 mb-4 mx-2"
+        >
+          Randomize
+        </button>
+        <button
           onClick={handleDownload}
-          className="bg-slate-200 border border-gray-100 hover:bg-slate-400 text-gray-600 font-bold py-2 px-4 rounded mt-4 mb-4 mx-auto"
+          className="bg-slate-300 border border-gray-100 hover:bg-slate-400 text-gray-600 text-xl py-2 px-4 rounded mt-4 mb-4 mx-2"
         >
           Download
         </button>
