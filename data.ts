@@ -9,6 +9,13 @@ export const characterParts: CharacterParts = {
     { id: 3, name: 'Purple', image: '/assets/background/purple.png' },
     { id: 4, name: 'Red', image: '/assets/background/red.png' },
     { id: 5, name: 'Yellow', image: '/assets/background/yellow.png' },
+    { id: 6, name: 'BTC Orange', image: '/assets/background/btc-orange.png' },
+    { id: 7, name: 'GM Green', image: '/assets/background/gm-green.png' },
+    { id: 8, name: 'GM Orange', image: '/assets/background/gm-orange.png' },
+    { id: 9, name: 'GM Red', image: '/assets/background/gm-red.png' },
+    { id: 10, name: 'GM Yellow', image: '/assets/background/gm-yellow.png' },
+    { id: 11, name: 'GM Purple', image: '/assets/background/gm-purple.png' },
+    { id: 12, name: 'GM White', image: '/assets/background/gm-white.png' },
     // add more backgrounds
   ],
   type: [
