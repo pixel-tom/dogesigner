@@ -16,6 +16,7 @@ export const characterParts: CharacterParts = {
     { id: 10, name: 'GM Yellow', image: '/assets/background/gm-yellow.png' },
     { id: 11, name: 'GM Purple', image: '/assets/background/gm-purple.png' },
     { id: 12, name: 'GM White', image: '/assets/background/gm-white.png' },
+    { id: 13, name: 'GM BTC', image: '/assets/background/gm-btc.png' },
     // add more backgrounds
   ],
   type: [
