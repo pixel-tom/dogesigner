@@ -21,19 +21,18 @@ export const characterParts: CharacterParts = {
     { id: 6, name: 'Skeleton', image: '/assets/type/skeleton.png' },
     { id: 7, name: 'Solana', image: '/assets/type/solana.png' },
     { id: 8, name: 'Zombie', image: '/assets/type/zombie.png' },
-
-    // add more bodies
+    // add more types
   ],
   hats: [
     { id: 0, name: 'Admiral Hat', image: '/assets/hats/none.png' },
     { id: 1, name: 'Bandana Ninja', image: '/assets/hats/bandana-ninja.png' },
-    { id: 2, name: 'Bandana Ninja', image: '/assets/hats/biege-tophat.png' },
-    { id: 3, name: 'Bandana Ninja', image: '/assets/hats/black-backwards-cap.png' },
-    { id: 4, name: 'Bandana Ninja', image: '/assets/hats/black-bandana.png' },
-    { id: 5, name: 'Bandana Ninja', image: '/assets/hats/black-cap.png' },
-    { id: 6, name: 'Bandana Ninja', image: '/assets/hats/black-fedora-1.png' },
-    { id: 7, name: 'Bandana Ninja', image: '/assets/hats/black-fedora-2.png' },
-    { id: 8, name: 'Bandana Ninja', image: '/assets/hats/black-protagonist-hat.png' },
+    { id: 2, name: 'Biege Tophat', image: '/assets/hats/biege-tophat.png' },
+    { id: 3, name: 'Black Backwards Cap', image: '/assets/hats/black-backwards-cap.png' },
+    { id: 4, name: 'Black Bandana', image: '/assets/hats/black-bandana.png' },
+    { id: 5, name: 'Black Cap', image: '/assets/hats/black-cap.png' },
+    { id: 6, name: 'Black Fedora 1', image: '/assets/hats/black-fedora-1.png' },
+    { id: 7, name: 'Black Fedora 2', image: '/assets/hats/black-fedora-2.png' },
+    { id: 8, name: 'Black Protagonist Hat', image: '/assets/hats/black-protagonist-hat.png' },
     { id: 9, name: 'Bandana Ninja', image: '/assets/hats/black-tophat.png' },
     { id: 10, name: 'Bandana Ninja', image: '/assets/hats/blue-backwards-cap.png' },
     { id: 11, name: 'Bandana Ninja', image: '/assets/hats/blue-cap.png' },
@@ -98,7 +97,7 @@ export const characterParts: CharacterParts = {
     { id: 20, name: 'Cop Vest', image: '/assets/clothes/sailor-vest.png' },
     { id: 21, name: 'Cop Vest', image: '/assets/clothes/white-shirt.png' },
     { id: 22, name: 'Cop Vest', image: '/assets/clothes/green-smoking.png' },
-    // add more clothing items
+    // add more clothes
   ],
   eyes: [
     { id: 0, name: 'Eyes 1', image: '/assets/eyes/none.png' },

@@ -16,16 +16,22 @@ const CharacterPreview: React.FC<Props> = ({ selectedParts, onRandomize }) => {
   const handleDownload = () => {
     if (previewRef.current) {
       const pixelRatio = window.devicePixelRatio || 1;
-      html2canvas(previewRef.current, { backgroundColor: null, scale: pixelRatio }).then(
-        (canvas) => {
-          const link = document.createElement("a");
-          link.href = canvas.toDataURL("image/png");
-          link.download = "character.png";
-          link.click();
-        }
-      );
+      const width = previewRef.current.clientWidth;
+      const height = previewRef.current.clientHeight;
+      html2canvas(previewRef.current, {
+        backgroundColor: null,
+        scale: pixelRatio,
+        width: width * pixelRatio,
+        height: height * pixelRatio,
+      }).then((canvas) => {
+        const link = document.createElement("a");
+        link.href = canvas.toDataURL("image/png");
+        link.download = "character.png";
+        link.click();
+      });
     }
   };
+  
 
   const handleRandomize = () => {
     const newSelectedParts: SelectedCharacterParts = {};
