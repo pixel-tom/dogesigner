@@ -45,7 +45,7 @@ const CharacterPreview: React.FC<Props> = ({ selectedParts, onRandomize }) => {
       <div
         className="relative bg-white p-2 rounded-lg shadow-lg mb-4"
         ref={previewRef}
-        style={{ width: "500px", height: "500px" }} // Update width and height values here
+        style={{ width: "450px", height: "450px" }} // Update width and height values here
       >
         {Object.keys(selectedParts).map((category) => {
           const part = selectedParts[category as keyof SelectedCharacterParts];
