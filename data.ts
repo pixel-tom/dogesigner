@@ -130,8 +130,8 @@ export const characterParts: CharacterParts = {
     // add more clothes
   ],
   eyes: [
-    { id: 0, name: 'VR Eyes', image: '/assets/eyes/vr.png' },
-    { id: 1, name: 'None', image: '/assets/eyes/none.png' },
+    { id: 0, name: 'None', image: '/assets/eyes/none.png' },
+    { id: 1, name: 'VR', image: '/assets/eyes/vr.png' },
     { id: 2, name: 'Gold Glasses', image: '/assets/eyes/gold-glasses.png' },
     { id: 3, name: 'Green Glasses', image: '/assets/eyes/green-glasses.png' },
     { id: 4, name: 'Laser Eyes', image: '/assets/eyes/laser-eyes.png' },
@@ -141,14 +141,7 @@ export const characterParts: CharacterParts = {
     { id: 8, name: 'Vipers', image: '/assets/eyes/vipers.png' },
     { id: 9, name: 'Cool Glasses', image: '/assets/eyes/cool-glasses.png' },
     { id: 10, name: 'Yellow Glasses', image: '/assets/eyes/yellow-glasses.png' },
-    { id: 11, name: 'VR Blue Eyes', image: '/assets/eyes/vr-blue.png' },
-    { id: 12, name: 'VR Gray Eyes', image: '/assets/eyes/vr-gray.png' },
-    { id: 13, name: 'VR Lime Eyes', image: '/assets/eyes/vr-lime.png' },
-    { id: 14, name: 'VR Orange Eyes', image: '/assets/eyes/vr-orange.png' },
-    { id: 15, name: 'VR Pink Eyes', image: '/assets/eyes/vr-pink.png' },
-    { id: 16, name: 'VR Solana Eyes', image: '/assets/eyes/vr-solana.png' },
-    { id: 17, name: 'VR Viper Eyes', image: '/assets/eyes/vr-viper.png' },
-    { id: 18, name: 'VR Gold Eyes', image: '/assets/eyes/vr-gold.png' },
+    
     // add more eyes
   ],
   mouth: [
@@ -193,5 +186,18 @@ export const characterParts: CharacterParts = {
     { id: 31, name: 'FU', image: '/assets/special/wario.png'},
     { id: 32, name: 'FU', image: '/assets/special/wizard.png'},
     { id: 33, name: 'FU', image: '/assets/special/zombie.png'},
+  ],
+  vr: [
+    { id: 0, name: 'None', image: '/assets/special/none.png' },
+    { id: 1, name: 'VR Blue Eyes', image: '/assets/eyes/vr-blue.png' },
+    { id: 2, name: 'VR Gray Eyes', image: '/assets/eyes/vr-gray.png' },
+    { id: 3, name: 'VR Lime Eyes', image: '/assets/eyes/vr-lime.png' },
+    { id: 4, name: 'VR Orange Eyes', image: '/assets/eyes/vr-orange.png' },
+    { id: 5, name: 'VR Pink Eyes', image: '/assets/eyes/vr-pink.png' },
+    { id: 6, name: 'VR Solana Eyes', image: '/assets/eyes/vr-solana.png' },
+    { id: 7, name: 'VR Viper Eyes', image: '/assets/eyes/vr-viper.png' },
+    { id: 8, name: 'VR Gold Eyes', image: '/assets/eyes/vr-gold.png' },
+    { id: 9, name: 'VR', image: '/assets/eyes/vr.png' },
+
   ]
 };

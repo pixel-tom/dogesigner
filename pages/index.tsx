@@ -20,6 +20,7 @@ const Home: NextPage = () => {
     eyes: characterParts.eyes[0],
     mouth: characterParts.mouth[0],
     special: characterParts.special[0],
+    vr: characterParts.vr[0],
   });
 
   const handlePartSelect = (category: keyof CharacterParts, partId: number) => {
@@ -46,6 +47,7 @@ const Home: NextPage = () => {
       eyes: getRandomPart("eyes"),
       mouth: getRandomPart("mouth"),
       special: getRandomPart("special"),
+      vr: getRandomPart("vr"),
     };
     setSelectedParts(newSelectedParts);
   };
