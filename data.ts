@@ -188,16 +188,16 @@ export const characterParts: CharacterParts = {
     { id: 33, name: 'FU', image: '/assets/special/zombie.png'},
   ],
   vr: [
-    { id: 0, name: 'None', image: '/assets/special/none.png' },
-    { id: 1, name: 'VR Blue Eyes', image: '/assets/eyes/vr-blue.png' },
-    { id: 2, name: 'VR Gray Eyes', image: '/assets/eyes/vr-gray.png' },
-    { id: 3, name: 'VR Lime Eyes', image: '/assets/eyes/vr-lime.png' },
-    { id: 4, name: 'VR Orange Eyes', image: '/assets/eyes/vr-orange.png' },
-    { id: 5, name: 'VR Pink Eyes', image: '/assets/eyes/vr-pink.png' },
-    { id: 6, name: 'VR Solana Eyes', image: '/assets/eyes/vr-solana.png' },
-    { id: 7, name: 'VR Viper Eyes', image: '/assets/eyes/vr-viper.png' },
-    { id: 8, name: 'VR Gold Eyes', image: '/assets/eyes/vr-gold.png' },
-    { id: 9, name: 'VR', image: '/assets/eyes/vr.png' },
+    { id: 0, name: 'None', image: '/assets/vr/none.png' },
+    { id: 1, name: 'VR Blue Eyes', image: '/assets/vr/vr-blue.png' },
+    { id: 2, name: 'VR Gray Eyes', image: '/assets/vr/vr-gray.png' },
+    { id: 3, name: 'VR Lime Eyes', image: '/assets/vr/vr-lime.png' },
+    { id: 4, name: 'VR Orange Eyes', image: '/assets/vr/vr-orange.png' },
+    { id: 5, name: 'VR Pink Eyes', image: '/assets/vr/vr-pink.png' },
+    { id: 6, name: 'VR Solana Eyes', image: '/assets/vr/vr-solana.png' },
+    { id: 7, name: 'VR Viper Eyes', image: '/assets/vr/vr-viper.png' },
+    { id: 8, name: 'VR Gold Eyes', image: '/assets/vr/vr-gold.png' },
+    { id: 9, name: 'VR', image: '/assets/vr/vr.png' },
 
   ]
 };
