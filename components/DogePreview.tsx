@@ -1,5 +1,5 @@
 // components/CharacterPreview.tsx
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Image from "next/image";
 import html2canvas from "html2canvas";
 import { CharacterParts, SelectedCharacterParts } from "../types";
@@ -12,21 +12,20 @@ interface Props {
 
 const CharacterPreview: React.FC<Props> = ({ selectedParts, onRandomize }) => {
   const previewRef = useRef<HTMLDivElement>(null);
+  const [downloadLink, setDownloadLink] = useState<string>("");
 
-  const handleDownload = () => {
+  const handleDownload = async () => {
     if (previewRef.current) {
       const pixelRatio = window.devicePixelRatio || 1;
-      html2canvas(previewRef.current, {
+      const canvas = await html2canvas(previewRef.current, {
         backgroundColor: null,
         scale: pixelRatio,
-      }).then((canvas) => {
-        canvas.style.width = `${previewRef.current?.clientWidth}px`;
-        canvas.style.height = `${previewRef.current?.clientHeight}px`;
-        const link = document.createElement("a");
-        link.href = canvas.toDataURL("image/png");
-        link.download = "character.png";
-        link.click();
       });
+
+      canvas.style.width = `${previewRef.current?.clientWidth}px`;
+      canvas.style.height = `${previewRef.current?.clientHeight}px`;
+      const dataURL = canvas.toDataURL("image/png");
+      setDownloadLink(dataURL);
     }
   };
 
@@ -71,7 +70,13 @@ const CharacterPreview: React.FC<Props> = ({ selectedParts, onRandomize }) => {
           onClick={handleDownload}
           className="bg-slate-300 border border-gray-100 hover:bg-slate-400 text-gray-600 text-xl py-2 px-4 rounded mt-4 mb-4 mx-2"
         >
-          Download
+          <a
+            href={downloadLink}
+            download="character.png"
+            className="no-underline text-gray-600"
+          >
+            Download
+          </a>
         </button>
       </div>
     </div>
