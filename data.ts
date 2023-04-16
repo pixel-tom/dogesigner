@@ -131,7 +131,7 @@ export const characterParts: CharacterParts = {
   ],
   eyes: [
     { id: 0, name: 'Eyes 1', image: '/assets/eyes/vr.png' },
-    { id: 1, name: 'Eyes 1', image: '/assets/eyes/cool-glasses.png' },
+    { id: 1, name: 'Eyes 1', image: '/assets/eyes/none.png' },
     { id: 2, name: 'Eyes 1', image: '/assets/eyes/gold-glasses.png' },
     { id: 3, name: 'Eyes 1', image: '/assets/eyes/green-glasses.png' },
     { id: 4, name: 'Eyes 1', image: '/assets/eyes/laser-eyes.png' },
@@ -139,7 +139,7 @@ export const characterParts: CharacterParts = {
     { id: 6, name: 'Eyes 1', image: '/assets/eyes/purple-glasses.png' },
     { id: 7, name: 'Eyes 1', image: '/assets/eyes/solana-vipers.png' },
     { id: 8, name: 'Eyes 1', image: '/assets/eyes/vipers.png' },
-    { id: 9, name: 'Eyes 1', image: '/assets/eyes/none.png' },
+    { id: 9, name: 'Eyes 1', image: '/assets/eyes/cool-glasses.png' },
     { id: 10, name: 'Eyes 1', image: '/assets/eyes/yellow-glasses.png' },
     { id: 11, name: 'Eyes 1', image: '/assets/eyes/vr-blue.png' },
     { id: 12, name: 'Eyes 1', image: '/assets/eyes/vr-gray.png' },
