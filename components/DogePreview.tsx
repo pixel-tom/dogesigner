@@ -37,8 +37,8 @@ const CharacterPreview: React.FC<Props> = ({ selectedParts, onRandomize }) => {
         try {
           const response = await fetch(dataURL);
           const blob = await response.blob();
-          const file = new File([blob], "character.png", { type: "image/png" });
-          await navigator.share({ title: "Character", files: [file] });
+          const file = new File([blob], "doge.png", { type: "image/png" });
+          await navigator.share({ title: "Doge", files: [file] });
         } catch (error) {
           console.error("Sharing failed:", error);
         }
@@ -89,7 +89,7 @@ const CharacterPreview: React.FC<Props> = ({ selectedParts, onRandomize }) => {
           onClick={handleDownload}
           className="bg-slate-300 border border-gray-100 hover:bg-slate-400 text-gray-600 text-xl py-2 px-4 rounded mt-4 mb-4 mx-2"
         >
-          Share / Download
+          Share
         </button>
       </div>
     </div>
