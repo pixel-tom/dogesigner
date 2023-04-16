@@ -8,10 +8,10 @@ import { characterParts } from "@/data";
 interface Props {
   selectedParts: SelectedCharacterParts;
   onRandomize: (newParts: SelectedCharacterParts) => void;
+  previewRef: React.RefObject<HTMLDivElement>; // Add this line
 }
 
-const CharacterPreview: React.FC<Props> = ({ selectedParts, onRandomize }) => {
-  const previewRef = useRef<HTMLDivElement>(null);
+const CharacterPreview: React.FC<Props> = ({ selectedParts, onRandomize, previewRef }) => {
 
   const isMobileDevice = () => {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
