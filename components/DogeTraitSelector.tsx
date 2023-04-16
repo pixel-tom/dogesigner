@@ -10,7 +10,7 @@ interface Props {
 }
 
 const CharacterPartSelector: React.FC<Props> = ({ parts, selected, onSelect }) => (
-  <div className="flex flex-wrap gap-2">
+  <div className="p-1 flex flex-wrap gap-2">
     {parts.map((part) => (
       <div
         key={part.id}
