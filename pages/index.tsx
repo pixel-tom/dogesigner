@@ -56,7 +56,7 @@ const Home: NextPage = () => {
         </div>
         <div className="flex flex-wrap justify-center">
           <CharacterPreview selectedParts={selectedParts} onRandomize={randomizeCharacter} />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-white p-4 rounded-lg shadow-lg">
+          <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4 bg-white p-4 rounded-lg shadow-lg">
             {Object.keys(characterParts).map((category) => (
               <div key={category} className="space-y-4">
                 <h2 className="text-3xl mb-4 text-red-800">{category}</h2>
