@@ -56,7 +56,7 @@ const Home: NextPage = () => {
     <div className="min-h-screen bg-gradient-to-r from-slate-50 via-slate-200 to-slate-300">
       <div className="max-w-screen-lg mx-auto px-4 py-8">
         <div className="flex justify-center mb-8">
-          <Image src="/canvas.png" alt="Canvas" width={400} height={200} />
+          <Image src="/canvas.png" alt="Canvas" width={500} height={250} />
         </div>
         <div className="flex flex-wrap justify-center">
           <CharacterPreview selectedParts={selectedParts} onRandomize={randomizeCharacter} />
