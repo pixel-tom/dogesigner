@@ -49,7 +49,7 @@ const Home: NextPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-100 ">
+    <div className="min-h-screen bg-gradient-to-r from-slate-100 via-slate-200 to-slate-300">
       <div className="max-w-screen-lg mx-auto px-4 py-8">
         <div className="flex justify-center mb-8">
           <Image src="/canvas.png" alt="Canvas" width={400} height={200} />
@@ -58,7 +58,7 @@ const Home: NextPage = () => {
           <CharacterPreview selectedParts={selectedParts} onRandomize={randomizeCharacter} />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-white p-4 rounded-lg shadow-lg">
             {Object.keys(characterParts).map((category) => (
-              <div key={category}>
+              <div key={category} className="space-y-4">
                 <h2 className="text-3xl mb-4 text-red-800">{category}</h2>
                 <CharacterPartSelector
                   parts={characterParts[category as keyof CharacterParts]}
@@ -74,6 +74,7 @@ const Home: NextPage = () => {
       </div>
     </div>
   );
+  
 };
 
 export default Home;
