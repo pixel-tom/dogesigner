@@ -58,7 +58,7 @@ const Home: NextPage = () => {
           <CharacterPreview selectedParts={selectedParts} onRandomize={randomizeCharacter} />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-white p-4 rounded-lg shadow-lg">
             {Object.keys(characterParts).map((category) => (
-              <div key={category} className="space-y-4 p-3">
+              <div key={category} className="space-y-4">
                 <h2 className="text-3xl mb-4 text-red-800">{category}</h2>
                 <CharacterPartSelector
                   parts={characterParts[category as keyof CharacterParts]}
