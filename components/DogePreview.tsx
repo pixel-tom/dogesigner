@@ -13,6 +13,12 @@ interface Props {
 const CharacterPreview: React.FC<Props> = ({ selectedParts, onRandomize }) => {
   const previewRef = useRef<HTMLDivElement>(null);
 
+  const isMobileDevice = () => {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      window.navigator.userAgent
+    );
+  };
+
   const handleDownload = async () => {
     if (previewRef.current) {
       const pixelRatio = window.devicePixelRatio || 1;
@@ -26,7 +32,7 @@ const CharacterPreview: React.FC<Props> = ({ selectedParts, onRandomize }) => {
       link.href = dataURL;
       link.download = "character.png";
 
-      if (navigator.share) {
+      if (navigator.share && isMobileDevice()) {
         // Use the Web Share API
         try {
           const response = await fetch(dataURL);
@@ -37,7 +43,7 @@ const CharacterPreview: React.FC<Props> = ({ selectedParts, onRandomize }) => {
           console.error("Sharing failed:", error);
         }
       } else {
-        // Fallback to download for unsupported browsers
+        // Fallback to download for unsupported browsers or PC
         link.click();
       }
     }
