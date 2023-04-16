@@ -1,5 +1,5 @@
 // components/CharacterPreview.tsx
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
 import html2canvas from "html2canvas";
 import { CharacterParts, SelectedCharacterParts } from "../types";
@@ -12,7 +12,6 @@ interface Props {
 
 const CharacterPreview: React.FC<Props> = ({ selectedParts, onRandomize }) => {
   const previewRef = useRef<HTMLDivElement>(null);
-  const [downloadLink, setDownloadLink] = useState<string>("");
 
   const handleDownload = async () => {
     if (previewRef.current) {
@@ -22,10 +21,25 @@ const CharacterPreview: React.FC<Props> = ({ selectedParts, onRandomize }) => {
         scale: pixelRatio,
       });
 
-      canvas.style.width = `${previewRef.current?.clientWidth}px`;
-      canvas.style.height = `${previewRef.current?.clientHeight}px`;
       const dataURL = canvas.toDataURL("image/png");
-      setDownloadLink(dataURL);
+      const link = document.createElement("a");
+      link.href = dataURL;
+      link.download = "character.png";
+
+      if (navigator.share) {
+        // Use the Web Share API
+        try {
+          const response = await fetch(dataURL);
+          const blob = await response.blob();
+          const file = new File([blob], "character.png", { type: "image/png" });
+          await navigator.share({ title: "Character", files: [file] });
+        } catch (error) {
+          console.error("Sharing failed:", error);
+        }
+      } else {
+        // Fallback to download for unsupported browsers
+        link.click();
+      }
     }
   };
 
@@ -70,13 +84,7 @@ const CharacterPreview: React.FC<Props> = ({ selectedParts, onRandomize }) => {
           onClick={handleDownload}
           className="bg-slate-300 border border-gray-100 hover:bg-slate-400 text-gray-600 text-xl py-2 px-4 rounded mt-4 mb-4 mx-2"
         >
-          <a
-            href={downloadLink}
-            download="character.png"
-            className="no-underline text-gray-600"
-          >
-            Download
-          </a>
+          Share / Download
         </button>
       </div>
     </div>
