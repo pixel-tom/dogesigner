@@ -46,11 +46,12 @@ const Home: NextPage = () => {
       clothes: getRandomPart("clothes"),
       eyes: getRandomPart("eyes"),
       mouth: getRandomPart("mouth"),
-      special: getRandomPart("special"),
-      vr: getRandomPart("vr"),
+      special: characterParts.special[0],
+      vr: characterParts.vr[0],
     };
     setSelectedParts(newSelectedParts);
   };
+  
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-slate-50 via-slate-200 to-slate-300">
