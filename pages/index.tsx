@@ -76,8 +76,8 @@ const Home: NextPage = () => {
       const dataURL = canvas.toDataURL("image/png");
       setUploadedImages((prevUploadedImages) => {
         let newUploadedImages = [...prevUploadedImages, dataURL];
-        if (newUploadedImages.length > 6) {
-          newUploadedImages = newUploadedImages.slice(-6);
+        if (newUploadedImages.length > 9) {
+          newUploadedImages = newUploadedImages.slice(-9);
         }
         localStorage.setItem(
           "uploadedImages",
@@ -88,24 +88,75 @@ const Home: NextPage = () => {
     }
   };
 
+  const handleRemove = (index: number) => {
+    setUploadedImages((prevUploadedImages) => {
+      const newUploadedImages = prevUploadedImages.filter(
+        (_, currentIndex) => currentIndex !== index
+      );
+      localStorage.setItem("uploadedImages", JSON.stringify(newUploadedImages));
+      return newUploadedImages;
+    });
+  };
+
+  const handleDownloadCollage = async () => {
+    const images = uploadedImages.slice(0, 9); // Limit to 9 images
+    const canvas = document.createElement("canvas");
+    canvas.width = 2400; // 3 images per row, each image is 800x800
+    canvas.height = 2400; // 3 rows, each row is 800 pixels tall
+    const ctx = canvas.getContext("2d");
+    if (ctx) {
+      for (let i = 0; i < images.length; i++) {
+        const img = new window.Image();
+        img.src = images[i];
+        await new Promise((resolve) => {
+          img.onload = () => {
+            if (ctx) {
+              const x = (i % 3) * 800;
+              const y = Math.floor(i / 3) * 800;
+              ctx.drawImage(img, x, y, 800, 800);
+              resolve(null);
+            }
+          };
+        });
+      }
+      const dataURL = canvas.toDataURL("image/png"); // Use PNG format
+      const link = document.createElement("a");
+      link.href = dataURL;
+      link.download = "gallery.png";
+      link.click();
+    }
+  };
+  
+  
+
   return (
     <div className="min-h-screen bg-gradient-to-r from-slate-50 via-slate-200 to-slate-300">
       <div className="max-w-screen-xl mx-auto px-4 py-8">
         <div className="flex justify-center mb-8">
           <Image src="/canvas.png" alt="Canvas" width={500} height={250} />
         </div>
-        <h1 className="flex justify-center text-red-800 text-xl">Recent Creation Gallery</h1>
-        <div className="grid grid-cols-3 lg:grid-cols-6 md:grid-cols-6 sm:grid-cols-3 gap-12 p-4">
-          {uploadedImages.map((image, index) => (
-            <div key={index} className="relative h-32 w-32 mb-10">
-              <Image
-                src={image}
-                alt={`Uploaded Image ${index}`}
-                layout="fill"
-                objectFit="cover"
-              />
-            </div>
-          ))}
+        <h1 className="flex justify-center text-red-800 text-xl mb-3">
+          Recent Creation Gallery
+        </h1>
+        <div className="flex justify-center mx-auto">
+          <div className="grid grid-cols-3 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-3 gap-8 mt-4 mb-4">
+            {uploadedImages.map((image, index) => (
+              <div key={index} className="relative h-32 w-32">
+                <Image
+                  src={image}
+                  alt={`Uploaded Image ${index}`}
+                  layout="fill"
+                  objectFit="cover"
+                />
+                <button
+                  onClick={() => handleRemove(index)}
+                  className="absolute top-0 right-0 bg-red-500 text-white px-1 py-0.5 text-xs rounded-bl"
+                >
+                  Remove
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
         <div className="flex justify-center">
           <button
@@ -113,6 +164,12 @@ const Home: NextPage = () => {
             className="bg-slate-300 border border-gray-100 hover:bg-slate-400 text-gray-600 text-xl py-2 px-4 rounded mt-4 mb-4 mx-2"
           >
             Upload to Gallery
+          </button>
+          <button
+            onClick={handleDownloadCollage}
+            className="bg-slate-300 border border-gray-100 hover:bg-slate-400 text-gray-600 text-xl py-2 px-4 rounded mt-4 mb-4 mx-2"
+          >
+            Download Collage
           </button>
         </div>
         <div className="flex flex-wrap justify-center">
