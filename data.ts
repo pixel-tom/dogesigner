@@ -29,6 +29,7 @@ export const characterParts: CharacterParts = {
     { id: 6, name: 'Skeleton', image: '/assets/type/skeleton.png' },
     { id: 7, name: 'Solana', image: '/assets/type/solana.png' },
     { id: 8, name: 'Zombie', image: '/assets/type/zombie.png' },
+    { id: 9, name: 'Albino', image: '/assets/type/albinos.png' },
     // add more types
   ],
   hats: [
