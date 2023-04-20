@@ -98,6 +98,10 @@ const Home: NextPage = () => {
     });
   };
 
+  function isMobileDevice() {
+    return /Mobi/.test(navigator.userAgent);
+  }
+
   const handleDownloadCollage = async () => {
     const images = uploadedImages.slice(0, 9); // Limit to 9 images
     const canvas = document.createElement("canvas");
@@ -120,15 +124,26 @@ const Home: NextPage = () => {
         });
       }
       const dataURL = canvas.toDataURL("image/png"); // Use PNG format
-      const link = document.createElement("a");
-      link.href = dataURL;
-      link.download = "gallery.png";
-      link.click();
-      
+
+      if (navigator.share && isMobileDevice()) {
+        // Use the Web Share API
+        try {
+          const response = await fetch(dataURL);
+          const blob = await response.blob();
+          const file = new File([blob], "doge.png", { type: "image/png" });
+          await navigator.share({ title: "Doge", files: [file] });
+        } catch (error) {
+          console.error("Sharing failed:", error);
+        }
+      } else {
+        // Fallback to download for unsupported browsers or PC
+        const link = document.createElement("a");
+        link.href = dataURL;
+        link.download = "gallery.png";
+        link.click();
+      }
     }
   };
-  
-  
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-slate-50 via-slate-200 to-slate-300">
@@ -166,7 +181,6 @@ const Home: NextPage = () => {
       </div>
     </div>
   );
-
 };
 
 export default Home;
