@@ -11,8 +11,11 @@ interface Props {
   previewRef: React.RefObject<HTMLDivElement>; // Add this line
 }
 
-const CharacterPreview: React.FC<Props> = ({ selectedParts, onRandomize, previewRef }) => {
-
+const CharacterPreview: React.FC<Props> = ({
+  selectedParts,
+  onRandomize,
+  previewRef,
+}) => {
   const isMobileDevice = () => {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
       window.navigator.userAgent
@@ -44,7 +47,32 @@ const CharacterPreview: React.FC<Props> = ({ selectedParts, onRandomize, preview
         }
       } else {
         // Fallback to download for unsupported browsers or PC
-        link.click();
+        const images = [dataURL]; // Wrap the dataURL in an array
+        const canvas = document.createElement("canvas");
+        canvas.width = 800; // 1 image per row, each image is 800x800
+        canvas.height = 800; // 1 row, each row is 800 pixels tall
+        const ctx = canvas.getContext("2d");
+        if (ctx) {
+          for (let i = 0; i < images.length; i++) {
+            const img = new window.Image();
+            img.src = images[i];
+            await new Promise((resolve) => {
+              img.onload = () => {
+                if (ctx) {
+                  const x = (i % 1) * 800;
+                  const y = Math.floor(i / 1) * 800;
+                  ctx.drawImage(img, x, y, 800, 800);
+                  resolve(null);
+                }
+              };
+            });
+          }
+          const dataURL = canvas.toDataURL("image/png"); // Use PNG format
+          const link = document.createElement("a");
+          link.href = dataURL;
+          link.download = "doge.png";
+          link.click();
+        }
       }
     }
   };
@@ -89,12 +117,11 @@ const CharacterPreview: React.FC<Props> = ({ selectedParts, onRandomize, preview
           onClick={handleDownload}
           className="bg-slate-300 border border-gray-100 hover:bg-slate-400 text-gray-600 text-xl py-2 px-4 rounded mt-4 mb-4 mx-2"
         >
-          Share
+          Download Image
         </button>
       </div>
     </div>
   );
-  
 };
 
 export default CharacterPreview;
