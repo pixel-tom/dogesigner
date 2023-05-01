@@ -17,7 +17,7 @@ const CharacterPartSelector: React.FC<Props> = ({ parts, selected, onSelect }) =
         onClick={() => onSelect(part.id)}
         className={`border-2 ${selected === part.id ? 'border-indigo-500' : 'border-transparent'} p-1 rounded cursor-pointer hover:border-indigo-400 transition duration-150 ease-in-out`}
       >
-        <Image src={part.image} alt={part.name} width={50} height={50} />
+        <Image src={part.image} alt={part.name} width={60} height={60} />
       </div>
     ))}
   </div>

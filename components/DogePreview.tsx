@@ -25,57 +25,56 @@ const CharacterPreview: React.FC<Props> = ({
   const handleDownload = async () => {
     if (previewRef.current) {
       const pixelRatio = window.devicePixelRatio || 1;
+      const scaleFactor = pixelRatio * 10; // Increase scale factor for higher resolution
       const canvas = await html2canvas(previewRef.current, {
         backgroundColor: null,
-        scale: pixelRatio,
+        scale: scaleFactor,
       });
-
+  
       const dataURL = canvas.toDataURL("image/png");
       const link = document.createElement("a");
       link.href = dataURL;
       link.download = "character.png";
-
+  
       if (navigator.share && isMobileDevice()) {
         // Use the Web Share API
         try {
           const response = await fetch(dataURL);
           const blob = await response.blob();
-          const file = new File([blob], "doge.png", { type: "image/png" });
-          await navigator.share({ title: "Doge", files: [file] });
+          const file = new File([blob], "character.png", { type: "image/png" });
+          await navigator.share({ title: "Character", files: [file] });
         } catch (error) {
           console.error("Sharing failed:", error);
         }
       } else {
         // Fallback to download for unsupported browsers or PC
-        const images = [dataURL]; // Wrap the dataURL in an array
+        const imageSize = 800 * scaleFactor;
         const canvas = document.createElement("canvas");
-        canvas.width = 800; // 1 image per row, each image is 800x800
-        canvas.height = 800; // 1 row, each row is 800 pixels tall
+        canvas.width = imageSize;
+        canvas.height = imageSize;
         const ctx = canvas.getContext("2d");
         if (ctx) {
-          for (let i = 0; i < images.length; i++) {
-            const img = new window.Image();
-            img.src = images[i];
-            await new Promise((resolve) => {
-              img.onload = () => {
-                if (ctx) {
-                  const x = (i % 1) * 800;
-                  const y = Math.floor(i / 1) * 800;
-                  ctx.drawImage(img, x, y, 800, 800);
-                  resolve(null);
-                }
-              };
-            });
-          }
-          const dataURL = canvas.toDataURL("image/png"); // Use PNG format
+          const img = new window.Image();
+          img.src = dataURL;
+          await new Promise((resolve) => {
+            img.onload = () => {
+              if (ctx) {
+                ctx.drawImage(img, 0, 0, imageSize, imageSize);
+                resolve(null);
+              }
+            };
+          });
+          const finalDataURL = canvas.toDataURL("image/png"); // Use PNG format
           const link = document.createElement("a");
-          link.href = dataURL;
-          link.download = "doge.png";
+          link.href = finalDataURL;
+          link.download = "character.png";
           link.click();
         }
       }
     }
   };
+  
+  
 
   const handleRandomize = () => {
     const newSelectedParts: SelectedCharacterParts = {};
@@ -102,6 +101,7 @@ const CharacterPreview: React.FC<Props> = ({
               alt={part.name}
               layout="fill"
               objectFit="contain"
+              quality={100} // Increase the quality value (e.g., 100 for maximum quality)
             />
           );
         })}
