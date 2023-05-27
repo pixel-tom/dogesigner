@@ -72,7 +72,7 @@ const Home: NextPage = () => {
               previewRef={previewRef} // Pass the previewRef here
             />
           </div>
-          <div className="grid grid-cols-3 md:grid-cols-3 gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mx-auto">
             {Object.keys(characterParts).map((category) => (
               <div key={category} className="space-y-2">
                 <h2 className="text-lg text-gray-300">{category}</h2>
