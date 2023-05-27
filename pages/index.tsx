@@ -1,6 +1,8 @@
 import type { NextPage } from "next";
 import { useEffect, useState } from "react";
 import { characterParts } from "../data";
+import Navbar from "../components/Navbar";
+
 import Image from "next/image";
 import CharacterPartSelector from "../components/DogeTraitSelector";
 import CharacterPreview from "../components/DogePreview";
@@ -9,9 +11,7 @@ import {
   CharacterPart as CharacterPartType,
   SelectedCharacterParts,
 } from "../types";
-import html2canvas from "html2canvas";
 import React, { useRef } from "react";
-import DogeGallery from "../components/DogeGallery";
 
 const Home: NextPage = () => {
   const [selectedParts, setSelectedParts] = useState<SelectedCharacterParts>({
@@ -56,117 +56,26 @@ const Home: NextPage = () => {
 
   const previewRef = useRef<HTMLDivElement>(null);
 
-  const [uploadedImages, setUploadedImages] = useState<string[]>([]);
-
-  useEffect(() => {
-    const storedImages = localStorage.getItem("uploadedImages");
-    if (storedImages) {
-      setUploadedImages(JSON.parse(storedImages));
-    }
-  }, []);
-
-  const handleUpload = async () => {
-    if (previewRef.current) {
-      const pixelRatio = window.devicePixelRatio || 1;
-      const canvas = await html2canvas(previewRef.current, {
-        backgroundColor: null,
-        scale: pixelRatio,
-      });
-
-      const dataURL = canvas.toDataURL("image/png");
-      setUploadedImages((prevUploadedImages) => {
-        let newUploadedImages = [...prevUploadedImages, dataURL];
-        if (newUploadedImages.length > 9) {
-          newUploadedImages = newUploadedImages.slice(-9);
-        }
-        localStorage.setItem(
-          "uploadedImages",
-          JSON.stringify(newUploadedImages)
-        );
-        return newUploadedImages;
-      });
-    }
-  };
-
-  const handleRemove = (index: number) => {
-    setUploadedImages((prevUploadedImages) => {
-      const newUploadedImages = prevUploadedImages.filter(
-        (_, currentIndex) => currentIndex !== index
-      );
-      localStorage.setItem("uploadedImages", JSON.stringify(newUploadedImages));
-      return newUploadedImages;
-    });
-  };
-
-  function isMobileDevice() {
-    return /Mobi/.test(navigator.userAgent);
-  }
-
-  const handleDownloadCollage = async () => {
-    const images = uploadedImages.slice(0, 9); // Limit to 9 images
-    const canvas = document.createElement("canvas");
-    canvas.width = 2400; // 3 images per row, each image is 800x800
-    canvas.height = 2400; // 3 rows, each row is 800 pixels tall
-    const ctx = canvas.getContext("2d");
-    if (ctx) {
-      for (let i = 0; i < images.length; i++) {
-        const img = new window.Image();
-        img.src = images[i];
-        await new Promise((resolve) => {
-          img.onload = () => {
-            if (ctx) {
-              const x = (i % 3) * 800;
-              const y = Math.floor(i / 3) * 800;
-              ctx.drawImage(img, x, y, 800, 800);
-              resolve(null);
-            }
-          };
-        });
-      }
-      const dataURL = canvas.toDataURL("image/png"); // Use PNG format
-
-      if (navigator.share && isMobileDevice()) {
-        // Use the Web Share API
-        try {
-          const response = await fetch(dataURL);
-          const blob = await response.blob();
-          const file = new File([blob], "doge.png", { type: "image/png" });
-          await navigator.share({ title: "Doge", files: [file] });
-        } catch (error) {
-          console.error("Sharing failed:", error);
-        }
-      } else {
-        // Fallback to download for unsupported browsers or PC
-        const link = document.createElement("a");
-        link.href = dataURL;
-        link.download = "gallery.png";
-        link.click();
-      }
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-gradient-to-r from-slate-50 via-slate-200 to-slate-300">
-      <div className="max-w-screen-xl mx-auto px-4 py-8">
-        <div className="flex justify-center mb-8">
-          <Image src="/canvas.png" alt="Canvas" width={500} height={250} />
-        </div>
-        <DogeGallery
-          uploadedImages={uploadedImages}
-          onUpload={handleUpload}
-          onRemove={handleRemove}
-          onDownload={handleDownloadCollage}
-        />
-        <div className="flex flex-wrap justify-center">
-          <CharacterPreview
-            selectedParts={selectedParts}
-            onRandomize={randomizeCharacter}
-            previewRef={previewRef} // Pass the previewRef here
-          />
-          <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4 bg-white p-4 rounded-lg shadow-lg">
+    <div className="min-h-screen bg-[#0F0F0F] flex flex-col items-center">
+      <Navbar />
+      <div className="relative w-full">
+        <Image src="/vr-banner.gif" alt="Canvas" width={1900} height={250} />
+        <div className="absolute w-full h-full bottom-0 bg-gradient-to-b from-transparent to-[#0F0F0F]" />
+      </div>
+      <div className="max-w-screen-lg w-full px-4 pt-20 -mt-20 sm:-mt-30 md:-mt-40 lg:-mt-60 xl:-mt-96 z-10">
+        <div className="pt-10 grid grid-cols-1 md:grid-cols-2 gap-4 bg-[#111111] p-2 border border-gray-600 rounded-lg shadow-lg">
+          <div>
+            <CharacterPreview
+              selectedParts={selectedParts}
+              onRandomize={randomizeCharacter}
+              previewRef={previewRef} // Pass the previewRef here
+            />
+          </div>
+          <div className="grid grid-cols-3 md:grid-cols-3 gap-2">
             {Object.keys(characterParts).map((category) => (
               <div key={category} className="space-y-4">
-                <h2 className="text-3xl mb-4 text-red-800">{category}</h2>
+                <h2 className="text-2xl mb-2 text-gray-300">{category}</h2>
                 <CharacterPartSelector
                   parts={characterParts[category as keyof CharacterParts]}
                   selected={selectedParts[category as keyof CharacterParts].id}
@@ -178,6 +87,7 @@ const Home: NextPage = () => {
             ))}
           </div>
         </div>
+        <div className="h-40"></div>
       </div>
     </div>
   );
