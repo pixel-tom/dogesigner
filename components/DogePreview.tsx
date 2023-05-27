@@ -1,6 +1,6 @@
 // components/CharacterPreview.tsx
 import React, { useRef } from "react";
-import Image from "next/image";
+import NextImage from "next/image";
 import html2canvas from "html2canvas";
 import { CharacterParts, SelectedCharacterParts } from "../types";
 import { characterParts } from "@/data";
@@ -8,7 +8,7 @@ import { characterParts } from "@/data";
 interface Props {
   selectedParts: SelectedCharacterParts;
   onRandomize: (newParts: SelectedCharacterParts) => void;
-  previewRef: React.RefObject<HTMLDivElement>; // Add this line
+  previewRef: React.RefObject<HTMLDivElement>;
 }
 
 const CharacterPreview: React.FC<Props> = ({
@@ -23,40 +23,45 @@ const CharacterPreview: React.FC<Props> = ({
   };
 
   const handleDownload = async () => {
-    if (previewRef.current) {
-      const pixelRatio = window.devicePixelRatio || 1;
-      const scaleFactor = pixelRatio;
-  
-      const canvas = await html2canvas(previewRef.current, {
-        backgroundColor: null,
-        scale: scaleFactor,
+    const selectedPartKeys = Object.keys(selectedParts);
+    if (selectedPartKeys.length === 0) return; // No selected parts
+
+    const canvas = document.createElement("canvas");
+    const context = canvas.getContext("2d");
+
+    const imagePromises = selectedPartKeys.map((category) => {
+      const part = selectedParts[category];
+      return new Promise<HTMLImageElement>((resolve, reject) => {
+        const image = new Image();
+        image.crossOrigin = "anonymous";
+        image.onload = () => {
+          resolve(image);
+        };
+        image.onerror = reject;
+        image.src = part.image;
       });
-  
+    });
+
+    try {
+      const images = await Promise.all(imagePromises);
+
+      canvas.width = images[0].width;
+      canvas.height = images[0].height;
+
+      images.forEach((image) => {
+        context?.drawImage(image, 0, 0);
+      });
+
       const dataURL = canvas.toDataURL("image/png");
-  
-      if (navigator.share && isMobileDevice()) {
-        // Use the Web Share API
-        try {
-          const response = await fetch(dataURL);
-          const blob = await response.blob();
-          const file = new File([blob], "character.png", { type: "image/png" });
-          await navigator.share({ title: "Character", files: [file] });
-        } catch (error) {
-          console.error("Sharing failed:", error);
-        }
-      } else {
-        // Fallback to download for unsupported browsers or PC
-        const link = document.createElement("a");
-        link.href = dataURL;
-        link.download = "character.png";
-        link.click();
-      }
+
+      const link = document.createElement("a");
+      link.href = dataURL;
+      link.download = "character.png";
+      link.click();
+    } catch (error) {
+      console.error("Image download failed:", error);
     }
   };
-  
-  
-  
-  
 
   const handleRandomize = () => {
     const newSelectedParts: SelectedCharacterParts = {};
@@ -71,19 +76,19 @@ const CharacterPreview: React.FC<Props> = ({
   return (
     <div>
       <div
-        className="relative mx-auto w-72 h-72 lg:h-96 lg:w-96 xl:h-96 xl:w-96 bg-none rounded-lg shadow-lg mb-2"
+        className="relative mx-auto w-72 h-72 lg:h-90 lg:w-90 xl:h-[320px] xl:w-[320px] bg-none rounded-lg shadow-lg mb-2"
         ref={previewRef}
       >
         {Object.keys(selectedParts).map((category) => {
           const part = selectedParts[category as keyof SelectedCharacterParts];
           return (
-            <Image
+            <NextImage
               key={category}
               src={part.image}
               alt={part.name}
               layout="fill"
               objectFit="responsive"
-              quality={100} // Increase the quality value (e.g., 100 for maximum quality)
+              quality={100}
             />
           );
         })}
@@ -91,13 +96,13 @@ const CharacterPreview: React.FC<Props> = ({
       <div className="flex justify-center">
         <button
           onClick={handleRandomize}
-          className="bg-none border border-[#444444] hover:bg-[#222222] text-gray-200 text-xl py-2 px-4 rounded mt-4 mb-4 mx-2"
+          className="bg-none border border-[#444444] hover:bg-[#222222] text-gray-200 text-md py-2 px-4 rounded mt-4 mb-4 mx-2"
         >
           Randomize
         </button>
         <button
           onClick={handleDownload}
-          className="bg-none border border-[#444444] hover:bg-[#222222] text-gray-200 text-xl py-2 px-4 rounded mt-4 mb-4 mx-2"
+          className="bg-none border border-[#444444] hover:bg-[#222222] text-gray-200 text-md py-2 px-4 rounded mt-4 mb-4 mx-2"
         >
           Download Image
         </button>

@@ -4,23 +4,23 @@
 
 /* styles/globals.css */
 body {
-  font-family: "League Gothic", sans-serif;
+  font-family: "Consolas", monospace;
 }
 
 /* For WebKit-based browsers (Chrome, Safari, etc.) */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
-  background-color: #F5F5F5;
+  background-color: #222222;
 }
 
 ::-webkit-scrollbar-thumb {
   border-radius: 4px;
-  background-color: #BEBEBE;
+  background-color: #333333;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #A0A0A0;
+  background-color: #444444;
 }
 
 /* For Firefox */

@@ -34,7 +34,7 @@ export const characterParts: CharacterParts = {
     // add more types
   ],
   hats: [
-    { id: 0, name: 'Admiral Hat', image: '/assets/hats/none.png' },
+    { id: 0, name: 'None', image: '/assets/hats/none.png' },
     { id: 1, name: 'Bandana Ninja', image: '/assets/hats/bandana-ninja.png' },
     { id: 2, name: 'Biege Tophat', image: '/assets/hats/biege-tophat.png' },
     { id: 3, name: 'Black Backwards Cap', image: '/assets/hats/black-backwards-cap.png' },

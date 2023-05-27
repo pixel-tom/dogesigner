@@ -72,10 +72,10 @@ const Home: NextPage = () => {
               previewRef={previewRef} // Pass the previewRef here
             />
           </div>
-          <div className="grid grid-cols-3 md:grid-cols-3 gap-2">
+          <div className="grid grid-cols-3 md:grid-cols-3 gap-3">
             {Object.keys(characterParts).map((category) => (
-              <div key={category} className="space-y-4">
-                <h2 className="text-2xl mb-2 text-gray-300">{category}</h2>
+              <div key={category} className="space-y-2">
+                <h2 className="text-lg text-gray-300">{category}</h2>
                 <CharacterPartSelector
                   parts={characterParts[category as keyof CharacterParts]}
                   selected={selectedParts[category as keyof CharacterParts].id}
@@ -87,7 +87,7 @@ const Home: NextPage = () => {
             ))}
           </div>
         </div>
-        <div className="h-40"></div>
+        
       </div>
     </div>
   );
