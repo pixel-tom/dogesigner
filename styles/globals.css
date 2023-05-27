@@ -5,6 +5,7 @@
 /* styles/globals.css */
 body {
   font-family: "Consolas", monospace;
+  background-color: #111111;
 }
 
 /* For WebKit-based browsers (Chrome, Safari, etc.) */
