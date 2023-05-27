@@ -87,7 +87,17 @@ const Home: NextPage = () => {
             ))}
           </div>
         </div>
-        
+        <div className="h-20"></div>
+        <div className="h-40">
+          <h3 className="text-gray-400 text-center mb-3 mx-auto">Powered by</h3>
+          <Image
+            className="mx-auto"
+            src="/doge.png"
+            alt="Doge Capital"
+            width="200"
+            height="125"
+          ></Image>
+        </div>
       </div>
     </div>
   );

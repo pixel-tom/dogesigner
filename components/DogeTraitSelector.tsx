@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { CharacterPart } from '../types';
-import Image from 'next/image';
+import React, { useState, useEffect, useRef } from "react";
+import { CharacterPart } from "../types";
+import Image from "next/image";
 
 interface Props {
   parts: CharacterPart[];
@@ -8,7 +8,11 @@ interface Props {
   onSelect: (id: number) => void;
 }
 
-const CharacterPartSelector: React.FC<Props> = ({ parts, selected, onSelect }) => {
+const CharacterPartSelector: React.FC<Props> = ({
+  parts,
+  selected,
+  onSelect,
+}) => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const selectorRef = useRef<HTMLDivElement>(null);
 
@@ -22,10 +26,10 @@ const CharacterPartSelector: React.FC<Props> = ({ parts, selected, onSelect }) =
       }
     };
 
-    window.addEventListener('click', handleClickOutside);
+    window.addEventListener("click", handleClickOutside);
 
     return () => {
-      window.removeEventListener('click', handleClickOutside);
+      window.removeEventListener("click", handleClickOutside);
     };
   }, []);
 
@@ -39,27 +43,26 @@ const CharacterPartSelector: React.FC<Props> = ({ parts, selected, onSelect }) =
       const spaceBelow = window.innerHeight - rect.bottom;
       const spaceAbove = rect.top;
       const dropdownHeight = 260; // Adjust this value as needed
-  
+
       if (spaceBelow >= dropdownHeight || spaceBelow >= spaceAbove) {
-        return 'origin-top-right';
+        return "origin-top-right";
       } else if (spaceAbove >= dropdownHeight) {
-        return 'origin-bottom-right';
+        return "origin-bottom-right";
       } else {
         // Determine if the dropdown can fit within the viewport by comparing its height with available space
         const spaceAbovePercentage = spaceAbove / window.innerHeight;
         const spaceBelowPercentage = spaceBelow / window.innerHeight;
-  
+
         if (spaceAbovePercentage > spaceBelowPercentage) {
-          return 'origin-bottom-right';
+          return "origin-bottom-right";
         } else {
-          return 'origin-top-right';
+          return "origin-top-right";
         }
       }
     }
-  
-    return 'origin-top-right';
+
+    return "origin-top-right";
   };
-  
 
   const dropdownPosition = calculateDropdownPosition();
 
@@ -72,12 +75,21 @@ const CharacterPartSelector: React.FC<Props> = ({ parts, selected, onSelect }) =
           className="inline-flex justify-between w-full rounded-md px-3 py-2 bg-[#222222] text-xl font-medium text-gray-300 hover:bg-[#333333] focus:outline-none"
         >
           <div className="flex items-center">
-            {selectedPart && <Image src={selectedPart.image} alt={selectedPart.name} width={40} height={40} />}
-            <span className="ml-3 text-sm">{selectedPart ? selectedPart.name : 'Select part'}</span>
+            {selectedPart && (
+              <Image
+                src={selectedPart.image}
+                alt={selectedPart.name}
+                width={40}
+                height={40}
+              />
+            )}
+            <span className="ml-3 text-sm">
+              {selectedPart ? selectedPart.name : "Select part"}
+            </span>
           </div>
           <div>
             <svg
-              className="h-5 w-5 text-gray-400"
+              className="h-4 w-4 m-1 ml-4 text-gray-400"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
@@ -94,10 +106,10 @@ const CharacterPartSelector: React.FC<Props> = ({ parts, selected, onSelect }) =
       </div>
       {activeIndex !== null && activeIndex === selected && (
         <div
-          className={`absolute ${dropdownPosition} mt-2 max-h-48 w-[350px] overflow-x-auto overflow-y-scroll rounded-md shadow-lg bg-[#222222] ring-1 ring-black ring-opacity-5 focus:outline-none z-10`}
+          className={`absolute ${dropdownPosition} mt-2 max-h-48 w-[150px] md:w-[350px] overflow-x-auto overflow-y-scroll rounded-md shadow-lg bg-[#222222] ring-1 ring-black ring-opacity-5 focus:outline-none z-10`}
         >
           <div
-            className="py-1 grid grid-cols-2 gap-2"
+            className="py-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2"
             role="menu"
             aria-orientation="vertical"
             aria-labelledby="options-menu"
@@ -112,7 +124,12 @@ const CharacterPartSelector: React.FC<Props> = ({ parts, selected, onSelect }) =
                 className={`flex items-center gap-2 cursor-pointer hover:bg-[#333333] transition duration-150 ease-in-out p-4`}
                 role="menuitem"
               >
-                <Image src={part.image} alt={part.name} width={45} height={45} />
+                <Image
+                  src={part.image}
+                  alt={part.name}
+                  width={45}
+                  height={45}
+                />
                 <span className="text-xs text-gray-300">{part.name}</span>
               </div>
             ))}

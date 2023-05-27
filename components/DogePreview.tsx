@@ -25,10 +25,10 @@ const CharacterPreview: React.FC<Props> = ({
   const handleDownload = async () => {
     const selectedPartKeys = Object.keys(selectedParts);
     if (selectedPartKeys.length === 0) return; // No selected parts
-
+  
     const canvas = document.createElement("canvas");
     const context = canvas.getContext("2d");
-
+  
     const imagePromises = selectedPartKeys.map((category) => {
       const part = selectedParts[category];
       return new Promise<HTMLImageElement>((resolve, reject) => {
@@ -41,27 +41,32 @@ const CharacterPreview: React.FC<Props> = ({
         image.src = part.image;
       });
     });
-
+  
     try {
       const images = await Promise.all(imagePromises);
-
+  
       canvas.width = images[0].width;
       canvas.height = images[0].height;
-
+  
       images.forEach((image) => {
         context?.drawImage(image, 0, 0);
       });
-
-      const dataURL = canvas.toDataURL("image/png");
-
-      const link = document.createElement("a");
-      link.href = dataURL;
-      link.download = "character.png";
-      link.click();
+  
+      canvas.toBlob((blob) => {
+        if (blob) {
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement("a");
+          link.href = url;
+          link.download = "character.png";
+          link.click();
+          URL.revokeObjectURL(url);
+        }
+      }, "image/png");
     } catch (error) {
       console.error("Image download failed:", error);
     }
   };
+  
 
   const handleRandomize = () => {
     const newSelectedParts: SelectedCharacterParts = {};
