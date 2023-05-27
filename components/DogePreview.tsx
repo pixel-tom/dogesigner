@@ -71,7 +71,7 @@ const CharacterPreview: React.FC<Props> = ({
   return (
     <div>
       <div
-        className="relative mx-auto w-[420px] h-[420px] bg-none p-2 rounded-lg shadow-lg mb-2"
+        className="relative mx-auto w-72 h-72 lg:h-96 lg:w-96 xl:h-96 xl:w-96 bg-none rounded-lg shadow-lg mb-2"
         ref={previewRef}
       >
         {Object.keys(selectedParts).map((category) => {
@@ -82,7 +82,7 @@ const CharacterPreview: React.FC<Props> = ({
               src={part.image}
               alt={part.name}
               layout="fill"
-              objectFit="contain"
+              objectFit="responsive"
               quality={100} // Increase the quality value (e.g., 100 for maximum quality)
             />
           );

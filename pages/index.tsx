@@ -64,7 +64,7 @@ const Home: NextPage = () => {
         <div className="absolute w-full h-full bottom-0 bg-gradient-to-b from-transparent to-[#0F0F0F]" />
       </div>
       <div className="max-w-screen-lg w-full px-4 pt-20 -mt-20 sm:-mt-30 md:-mt-40 lg:-mt-60 xl:-mt-96 z-10">
-        <div className="pt-10 grid grid-cols-1 md:grid-cols-2 gap-4 bg-[#111111] p-2 border border-gray-600 rounded-lg shadow-lg">
+        <div className="p-8 pt-10 grid grid-cols-1 md:grid-cols-2 gap-4 bg-[#111111]  border border-gray-600 rounded-lg shadow-lg">
           <div>
             <CharacterPreview
               selectedParts={selectedParts}
