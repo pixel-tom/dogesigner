@@ -109,7 +109,7 @@ const CharacterPartSelector: React.FC<Props> = ({ parts, selected, onSelect }) =
                   onSelect(part.id);
                   setIsOpen(null);
                 }}
-                className={`flex items-center gap-2 cursor-pointer hover:bg-gray-100 transition duration-150 ease-in-out p-4`}
+                className={`flex items-center gap-2 cursor-pointer hover:bg-[#333333] transition duration-150 ease-in-out p-4`}
                 role="menuitem"
               >
                 <Image src={part.image} alt={part.name} width={45} height={45} />
