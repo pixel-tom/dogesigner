@@ -80,6 +80,16 @@ const Navbar = () => {
                     Fetch.
                   </button>
                 </li>
+                <li>
+                  <button
+                    className="w-full text-left hover:bg-[#333333] py-2 px-3"
+                    onClick={() =>
+                      handleDropdownItemClick("https://thedogecapital.com/nameyourdoge")
+                    }
+                  >
+                    Name Your Doge.
+                  </button>
+                </li>
               </ul>
             </div>
           )}
