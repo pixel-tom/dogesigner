@@ -57,7 +57,7 @@ const Navbar = () => {
                       handleDropdownItemClick("https://www.dogeswap.live/")
                     }
                   >
-                    Dogeswap.live
+                    Dogeswap.
                   </button>
                 </li>
                 <li>
@@ -67,7 +67,7 @@ const Navbar = () => {
                       handleDropdownItemClick("https://www.kenl.live/raffles")
                     }
                   >
-                    Kenl.live
+                    Kenl.
                   </button>
                 </li>
                 <li>
