@@ -1,11 +1,95 @@
+import React, { useState } from "react";
 import Image from "next/image";
 
 const Navbar = () => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const handleDropdownItemClick = (url: string | URL | undefined) => {
+    window.open(url, "_blank");
+  };
+
+  const handleDropdownToggle = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const handleDropdownMouseEnter = () => {
+    setIsDropdownOpen(true);
+  };
+
+  const handleDropdownMouseLeave = () => {
+    setIsDropdownOpen(false);
+  };
+
+  const handleListMouseEnter = () => {
+    setIsDropdownOpen(true);
+  };
+
+  const handleListMouseLeave = () => {
+    setIsDropdownOpen(false);
+  };
+
   return (
-    <nav className="absolute xl:fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-6 py-4">
+    <nav className="absolute xl:fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-6 py-4 bg-none">
       <div className="text-white text-3xl">Dogesigner.</div>
-      <div className="flex flex-row space-x-4">
-        <a href="https://twitter.com/thedogecapital">
+      <div className="flex items-center">
+        <div
+          className="relative"
+          onMouseEnter={handleDropdownMouseEnter}
+          onMouseLeave={handleDropdownMouseLeave}
+        >
+          <button
+            className="flex items-center focus:outline-none"
+            onClick={handleDropdownToggle}
+          >
+            <Image src="/doge-dark.png" width={40} height={35} alt="" />
+          </button>
+          {isDropdownOpen && (
+            <div
+              className="absolute top-full w-max right-0 bg-[#222222] text-white py-2 px-4 rounded-md"
+              onMouseEnter={handleListMouseEnter}
+              onMouseLeave={handleListMouseLeave}
+            >
+              <ul className="space-y-1">
+                <li>
+                  <button
+                    className="w-full text-left hover:bg-[#333333] py-2 px-3"
+                    onClick={() =>
+                      handleDropdownItemClick("https://www.dogeswap.live/")
+                    }
+                  >
+                    Dogeswap.live
+                  </button>
+                </li>
+                <li>
+                  <button
+                    className="w-full text-left hover:bg-[#333333] py-2 px-3"
+                    onClick={() =>
+                      handleDropdownItemClick("https://www.kenl.live/raffles")
+                    }
+                  >
+                    Kenl.live
+                  </button>
+                </li>
+                <li>
+                  <button
+                    className="w-full text-left hover:bg-[#333333] py-2 px-3"
+                    onClick={() =>
+                      handleDropdownItemClick("https://www.xnft.gg/app/3DtDRCUxFThJixdpotU2sq7n3Fbzz2bqtQPHaDqjHQae")
+                    }
+                  >
+                    Fetch.
+                  </button>
+                </li>
+              </ul>
+            </div>
+          )}
+        </div>
+        <a
+          href="https://twitter.com/thedogecapital"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center ml-4"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -34,8 +118,13 @@ const Navbar = () => {
             </g>
           </svg>
         </a>
-        <a href="https://discord.gg/XfZaFsbtDr">
-          <Image src="/discord.png" width="35" height="35" alt="" />
+        <a
+          href="https://discord.gg/XfZaFsbtDr"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center ml-4"
+        >
+          <Image src="/discord.png" width={35} height={35} alt="" />
         </a>
       </div>
     </nav>

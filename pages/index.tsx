@@ -89,14 +89,22 @@ const Home: NextPage = () => {
         </div>
         <div className="h-24"></div>
         <div className="h-32">
-          <h3 className="text-gray-400 text-center text-sm mb-3 mx-auto">Powered by</h3>
-          <Image
-            className="mx-auto"
-            src="/doge.png"
-            alt="Doge Capital"
-            width="160"
-            height="125"
-          ></Image>
+          <h3 className="text-gray-400 text-center text-sm mb-3 mx-auto">
+            Powered by
+          </h3>
+          <a
+            href="https://thedogecapital.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image
+              className="mx-auto"
+              src="/doge.png"
+              alt="Doge Capital"
+              width="160"
+              height="125"
+            ></Image>
+          </a>
         </div>
       </div>
     </div>
